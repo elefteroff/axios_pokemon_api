@@ -9,15 +9,11 @@ function App() {
   const getAxiosPokemon = () => {
     axios.get("https://pokeapi.co/api/v2/pokemon?limit=807")
       .then(response => {
-        console.log(response.data)
-        setPokemon([response.data])
+        console.log(response.data.results)
+        setPokemon(response.data.results)
       })
       .catch(error => console.log(error))
   }
-
-  // const pokemonIndex = pokemon.map(i => i.idx)
-  // const pokemonResults = pokemonIndex.map(r => r.results)
-  // const pokemonNames = pokemonResults.map(n => n.name)
 
   return (
     <div className="App">
@@ -32,10 +28,10 @@ function App() {
         </thead>
         <tbody>
           {
-            pokemon.map( (pname) => {
+            pokemon.map((p, idx) => {
               return (
-                <tr key={pname}>
-                  <td>{pname.name}</td>
+                <tr key={idx}>
+                  <td>{p.name}</td>
                 </tr>
               )
             })
